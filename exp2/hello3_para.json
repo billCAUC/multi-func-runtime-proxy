@@ -1,0 +1,8 @@
+{
+   "value": {
+      "name" : "hello3",
+      "main" : "main",
+      "binary" : false,
+      "code" : "def main(args): return {'payload': 'Hello World33333!'}"
+   }
+}

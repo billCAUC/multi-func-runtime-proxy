@@ -1,0 +1,8 @@
+{
+   "value": {
+      "name" : "python-helloworld",
+      "main" : "main",
+      "binary" : false,
+      "code" : "import time\ndef main(args): \n\tstart = time.time()\n\tend = time.time()\n\treturn {'payload': end-start}"
+   }
+}

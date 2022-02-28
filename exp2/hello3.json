@@ -1,0 +1,8 @@
+{
+   "value": {
+      "name" : "hello3",
+      "main" : "main",
+      "binary" : false,
+      "code" : "import time\nimport rsa as rsa\n# 分解模数n\ndef rsa_moder(n):\n    base = 2\n    while base < n:\n        if n % base == 0:\n            return base, n // base\n        base += 1\n\n\n# 求欧拉函数f(n)\ndef rsa_get_euler(prime1, prime2):\n    return (prime1 - 1) * (prime2 - 1)\n\n\n# 求私钥\ndef rsa_get_key(e, euler):\n    k = 1\n    while True:\n        if (((euler * k) + 1) % e) == 0:\n            return (euler * k + 1) // e\n        k += 1\n\n\n# 根据n,e计算d(或根据n,d计算e)\ndef get_rsa_e_d(n, e=None, d=None):\n    if e is None and d is None:\n        return\n\n    arg = e\n    if arg is None:\n        arg = d\n\n    primes = rsa_moder(n)\n    p = primes[0]\n    q = primes[1]\n\n    d = rsa_get_key(arg, rsa_get_euler(p, q))\n\n    return d\n\n\ndef main(args):\n    start=time.time()\n    str_fmt = 'n: {:<10} e: {:<10} d: {:<10}'\n\n    # 导入rsa库\n    key = rsa.newkeys(2048)\n\n    # 产生rsa密钥对\n    if isinstance(key[1], rsa.PrivateKey):\n        print(str_fmt.format(key[1].n, key[1].e, key[1].d))\n\n    # 解密\n    n = 14666299\n    d = 2101153\n    e = get_rsa_e_d(n, None, d)\n    \n\n    n = 12748507\n    e = 65537\n    d = get_rsa_e_d(n, e, None)\n    end=time.time()\n    return {'payload': d,'start_time':start,'end_time':end,'time':end-start}\n"
+   }
+}
