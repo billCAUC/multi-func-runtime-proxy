@@ -40,16 +40,6 @@ type initRequest struct {
 	Value initBodyRequest `json:"value,omitempty"`
 }
 
-func sendError(w http.ResponseWriter) {
-	// answer OK
-	w.Header().Set("Content-Type", "application/json")
-	buf := []byte("{\"Error\":true}\n")
-	w.Header().Set("Content-Length", fmt.Sprintf("%d", len(buf)))
-	w.Write(buf)
-	if f, ok := w.(http.Flusher); ok {
-		f.Flush()
-	}
-}
 
 func sendOK(w http.ResponseWriter) {
 	// answer OK
